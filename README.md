@@ -1,4 +1,4 @@
-# Notos app
+# NotOS
 
 ## Run the app
 
