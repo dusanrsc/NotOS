@@ -8,4 +8,7 @@
 # ![screenshot](https://github.com/user-attachments/assets/859ca5a2-595b-4a5a-8513-1f1477e40512)
   
 # v0.03.0-Alpha
-# ![screenshot1](https://github.com/user-attachments/assets/62d2ab54-d2fc-40a1-92db-636b47b2fce3)
+![screenshot1](https://github.com/user-attachments/assets/bd4513c5-308f-4dc0-9cf0-684b8b4327b2)
+
+# v0.04.0-Alpha
+![screenshot2](https://github.com/user-attachments/assets/3d3126fb-843c-420e-8c6b-c3955cf28349)
