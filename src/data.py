@@ -4,4 +4,4 @@ __version_date__: str = "07.july.2025"
 __developer_tag__ : str = "@dusanrsc"
 
 # Project Data.
-PROJECT_NAME = "NotOS"
+PROJECT_NAME: str = "NotOS"
