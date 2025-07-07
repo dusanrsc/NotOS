@@ -4,6 +4,7 @@ import data
 
 # Importing Sub-Modules Section.
 from flet import *
+from datetime import date, datetime
 
 # NotOS Global Settings Section.
 # CONSTANTS Section.
@@ -12,7 +13,7 @@ WINDOW_HEIGHT = 850
 
 METADATA = f"{data.PROJECT_NAME} {data.__version__} by: {data.__developer_tag__}"
 
-SCREEN_ABSTRACTION_BORDER_RADIUS = 20
+SCREEN_ABSTRACTION_BORDER_RADIUS = 10
 
 # Hexadecimal Color CONSTANTS Section.
 # Basic Hexadecimal Color CONSTANTS Section.
@@ -40,7 +41,19 @@ DEFAULT_SCREEN_ABSTRACTION_COLOR = DEFAULT_DARK_MODE
 DEFAULT_NAVBAR_COLOR = BLACK
 DEFAULT_NAVBAR_BACKGROUND_COLOR = WHITE
 
+DEFAULT_NAVBAR_HEIGHT = 40
 DEFAULT_NAVBAR_BUTTON_FONT_SIZE = 30
+
+# Global Variable Section.
+navigation_id = 0
+
+day_today = date.today()
+time_now = datetime.now().time().strftime(" %H:%M ")
+
+battery_level = 100
+
+# List Section.
+navigation_list = ["home"] # Examples ["phone", "camera", "sms"]
 
 # Main NotOS Logic Section.
 def main(page: Page):
@@ -55,8 +68,8 @@ def main(page: Page):
 
         # Default/Float Data Type Condition.
         if data_type == "float":
-            screen_width = page.window.width
-            screen_height = page.window.height
+            screen_width = float(page.window.width)
+            screen_height = float(page.window.height)
 
         # Integer Data Type Condition.
         elif data_type == "int":
@@ -71,15 +84,25 @@ def main(page: Page):
             # Error Handler Condition!
             # Explicitly Setting Up Data Type As Float Due To Potential Changes At The 'Flet' Framework Level Itself.
         else:
-            print("Error: Wrong Data Type! Choice Between: 'float: Default', 'int: Integer' and 'str: String'!")
-
             screen_width = float(page.window.width)
             screen_height = float(page.window.height)
 
+            print("Error: Wrong Data Type! Choice Between: 'float: Default', 'int: Integer' and 'str: String'!")
+
         return screen_width, screen_height
 
-    # Only In Development Stage!
-    print(get_screen_size(data_type="None"))
+    # Go Back Navigation Function.
+    def go_back_navigation() -> str:
+
+        # Global Variable.
+        global navigation_id
+
+        # Navigation Logic Section.
+        if navigation_id > 0:
+            navigation_id -= 1
+
+        # Return Current Navigation
+        return navigation_list[navigation_id]
 
     # Bootstrap Console Function.
     def bootstrap_console() -> None:
@@ -93,38 +116,96 @@ def main(page: Page):
         # { Write Your Code Here! }
         pass # Placeholder!
 
+    # Only In Development Stage!
+    # Printing Development Stage Data Function.
+    def print_development_data() -> None:
+        
+        # Only In Development Stage!
+        # Printing Parameters While Developing The App.
+        print(get_screen_size(data_type="float"))
+        print(navigation_list)
+        print(navigation_list[navigation_id])
+
     # Main Page Window Settings Section
     page.title = METADATA
     page.window.width = WINDOW_WIDTH
     page.window.height = WINDOW_HEIGHT
-    page.window.resizable = False       # Conditionaly
+    page.window.resizable = False # Conditionaly
     page.bgcolor = DEFAULT_PAGE_COLOR
     page.update()
 
     # Content Widgets Section.
-    # { Write Your Code Here! }
+    today_text_widget = Text(day_today)
+    now_text_widget = Text(time_now, color=BLACK)
 
-    # Creating Container Widget.
+    battery_text_widget = Text(f"{battery_level}%🔋", color=BLACK)
+
+    # Creating Screen Abstraction Widget.
     screen_abstraction = Container(
         border_radius=SCREEN_ABSTRACTION_BORDER_RADIUS,
         expand=True,
         bgcolor=DEFAULT_SCREEN_ABSTRACTION_COLOR,
         alignment=alignment.bottom_center,
         
-        # Navigation Bar Section!
-        # (get_screen_size(data_type="int")[1] // 20)
-        content=Container(height=40, expand=True, bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR, content=Row(
-            controls=[
-                ElevatedButton(text="  lll  ", elevation=False, expand=True, color=DEFAULT_NAVBAR_COLOR, bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR, style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)), on_click=lambda event: None),
-                ElevatedButton(text="   O   ", elevation=False, expand=True, color=DEFAULT_NAVBAR_COLOR, bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR, style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)), on_click=lambda event: None),
-                ElevatedButton(text="   V   ", elevation=False, expand=True, color=DEFAULT_NAVBAR_COLOR, bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR, style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)), on_click=lambda event: None),
+        content=Column(spacing=0, expand=True, controls=[
+
+                # Status Bar.
+                Container(
+                    height=(DEFAULT_NAVBAR_HEIGHT // 1.75),
+                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                    alignment=alignment.center_left,
+                    content=Row([now_text_widget, Container(expand=True), battery_text_widget])
+                ),
+
+                # Main Screen.
+                Container(
+                    expand=True,
+                    bgcolor="transparent",
+                ),
+
+                # Navigation Bar.
+                Container(
+                    height=DEFAULT_NAVBAR_HEIGHT,
+                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                    content=Row(
+                        controls=[
+
+                        # Navigation Bar Buttons.
+                            ElevatedButton(
+                                text="lll",
+                                elevation=False,
+                                expand=True,
+                                color=DEFAULT_NAVBAR_COLOR,
+                                bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
+                                on_click=lambda event: None,
+                            ),
+                            ElevatedButton(
+                                text=" O ",
+                                elevation=False,
+                                expand=True,
+                                color=DEFAULT_NAVBAR_COLOR,
+                                bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
+                                on_click=lambda event: go_back_navigation(),
+                            ),
+                            ElevatedButton(
+                                text=" △ ",
+                                elevation=False,
+                                expand=True,
+                                color=DEFAULT_NAVBAR_COLOR,
+                                bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
+                                on_click=lambda event: print_development_data(),
+                            ),
+                        ],
+                        spacing=(get_screen_size(data_type="int")[0] // 10),
+                    ),
+                ),
             ],
-            # Set Dynamic Spacing By Screen Width Divided By N.
-            spacing=(get_screen_size(data_type="int")[0] // 10)
-            )
-        )
+        ),
     )
-    
+
     # Rendering Parent Container Widget Into A Page. 
     page.add(screen_abstraction)
     
