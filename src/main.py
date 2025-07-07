@@ -7,8 +7,8 @@ from flet import *
 
 # NotOS Global Settings Section.
 # CONSTANTS Section.
-WINDOW_WIDTH  = None
-WINDOW_HEIGHT = None
+WINDOW_WIDTH  = 400
+WINDOW_HEIGHT = 850
 
 METADATA = f"{data.PROJECT_NAME} {data.__version__} by: {data.__developer_tag__}"
 
@@ -38,14 +38,16 @@ DEFAULT_PAGE_COLOR = GRAY
 DEFAULT_SCREEN_ABSTRACTION_COLOR = DEFAULT_DARK_MODE
 
 DEFAULT_NAVBAR_COLOR = BLACK
-DEFAULT_NAVBAR_BG_COLOR = WHITE
+DEFAULT_NAVBAR_BACKGROUND_COLOR = WHITE
+
+DEFAULT_NAVBAR_BUTTON_FONT_SIZE = 30
 
 # Main NotOS Logic Section.
 def main(page: Page):
 
     # NotOS Local Settings Section.
-    WINDOW_WIDTH  = page.window.width
-    WINDOW_HEIGHT = page.window.height
+    # WINDOW_WIDTH  = page.window.width
+    # WINDOW_HEIGHT = page.window.height
 
     # Local Functions Section.
     # Get Screen Size Function.
@@ -111,11 +113,11 @@ def main(page: Page):
         
         # Navigation Bar Section!
         # (get_screen_size(data_type="int")[1] // 20)
-        content=Container(height=40, expand=True, bgcolor=DEFAULT_NAVBAR_BG_COLOR, content=Row(
+        content=Container(height=40, expand=True, bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR, content=Row(
             controls=[
-                ElevatedButton(text="  |||  ", elevation=False, expand=True, color=DEFAULT_NAVBAR_COLOR, bgcolor=DEFAULT_NAVBAR_BG_COLOR, on_click=lambda event: None),
-                ElevatedButton(text="   o   ", elevation=False, expand=True, color=DEFAULT_NAVBAR_COLOR, bgcolor=DEFAULT_NAVBAR_BG_COLOR, on_click=lambda event: None),
-                ElevatedButton(text="   <   ", elevation=False, expand=True, color=DEFAULT_NAVBAR_COLOR, bgcolor=DEFAULT_NAVBAR_BG_COLOR, on_click=lambda event: None),
+                ElevatedButton(text="  lll  ", elevation=False, expand=True, color=DEFAULT_NAVBAR_COLOR, bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR, style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)), on_click=lambda event: None),
+                ElevatedButton(text="   O   ", elevation=False, expand=True, color=DEFAULT_NAVBAR_COLOR, bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR, style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)), on_click=lambda event: None),
+                ElevatedButton(text="   V   ", elevation=False, expand=True, color=DEFAULT_NAVBAR_COLOR, bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR, style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)), on_click=lambda event: None),
             ],
             # Set Dynamic Spacing By Screen Width Divided By N.
             spacing=(get_screen_size(data_type="int")[0] // 10)
