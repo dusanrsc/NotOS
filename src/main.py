@@ -4,59 +4,17 @@ import data
 
 # Importing Sub-Modules Section.
 from flet import *
-from datetime import date, datetime
-
-# NotOS Global Settings Section.
-# CONSTANTS Section.
-WINDOW_WIDTH  = 400
-WINDOW_HEIGHT = 850
-
-METADATA = f"{data.PROJECT_NAME} {data.__version__} by: {data.__developer_tag__}"
-
-SCREEN_ABSTRACTION_BORDER_RADIUS = 10
-
-# Hexadecimal Color CONSTANTS Section.
-# Basic Hexadecimal Color CONSTANTS Section.
-RED   = "#FF0000"
-GREEN = "#00FF00"
-BLUE  = "#0000FF"
-
-BLACK = "#000000"
-WHITE = "#FFFFFF"
-
-ALPHA = GREEN
-
-# Custom Hexadecimal Color CONSTANTS Section.
-GRAY  = "#333333"
-DARK_GRAY = "#111111"
-DARK_GREEN = "#005500"
-
-# Default Hexadecimal CONSTANTS Colors Section.
-DEFAULT_DARK_MODE  = BLACK
-DEFAULT_LIGHT_MODE = WHITE
-
-DEFAULT_PAGE_COLOR = GRAY
-DEFAULT_SCREEN_ABSTRACTION_COLOR = DEFAULT_DARK_MODE
-
-DEFAULT_NAVBAR_COLOR = BLACK
-DEFAULT_NAVBAR_BACKGROUND_COLOR = WHITE
-
-DEFAULT_NAVBAR_HEIGHT = 40
-DEFAULT_NAVBAR_BUTTON_FONT_SIZE = 30
-
-# Global Variable Section.
-navigation_id = 0
-
-day_today = date.today()
-time_now = datetime.now().time().strftime(" %H:%M ")
-
-battery_level = 100
-
-# List Section.
-navigation_list = ["home"] # Examples ["phone", "camera", "sms"]
+from settings import *
+from colors import *
 
 # Main NotOS Logic Section.
 def main(page: Page):
+
+    # Local Logic For Screen Mode!
+    if screen_mode == screen_mode_options[0]:
+        screen_mode_color_handler = BLACK
+    else:
+        screen_mode_color_handler = WHITE
 
     # NotOS Local Settings Section.
     # WINDOW_WIDTH  = page.window.width
@@ -92,7 +50,7 @@ def main(page: Page):
         return screen_width, screen_height
 
     # Go Back Navigation Function.
-    def go_back_navigation() -> str:
+    def go_back_navigation(event) -> str:
 
         # Global Variable.
         global navigation_id
@@ -113,8 +71,21 @@ def main(page: Page):
     # Setting Up Screen Mode(Dark/Light).
     def set_screen_mode() -> None:
 
-        # { Write Your Code Here! }
-        pass # Placeholder!
+        if screen_abstraction.bgcolor == BLACK:
+            screen_abstraction.bgcolor = WHITE
+        else:
+            screen_abstraction.bgcolor = BLACK
+
+        screen_abstraction.update()
+
+    # System Keyboard Key Down.
+    def system_keyboard_key_down(event, key=None) -> None:
+
+        # Global Variable.
+        global system_keyboard_key_down_list
+
+        # Adding Key In The List.
+        system_keyboard_key_down_list.append(key)
 
     # Only In Development Stage!
     # Printing Development Stage Data Function.
@@ -125,6 +96,8 @@ def main(page: Page):
         print(get_screen_size(data_type="float"))
         print(navigation_list)
         print(navigation_list[navigation_id])
+        print(set_screen_mode())
+        print(system_keyboard_key_down_list)
 
     # Main Page Window Settings Section
     page.title = METADATA
@@ -140,11 +113,89 @@ def main(page: Page):
 
     battery_text_widget = Text(f"{battery_level}%🔋", color=BLACK)
 
+    system_keyboard = Container(
+        bgcolor=DARK_GRAY,
+        padding=SYSTEM_KEYBOARD_ELEMENT_PADDING,
+        alignment=alignment.bottom_center,
+        content=Column(
+            spacing=SYSTEM_KEYBOARD_ELEMENT_PADDING,
+            controls=[
+                Row(
+                    controls=[
+                        ElevatedButton(text="1", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "1")), 
+                        ElevatedButton(text="2", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "2")), 
+                        ElevatedButton(text="3", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "3")), 
+                        ElevatedButton(text="4", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "4")), 
+                        ElevatedButton(text="5", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "5")), 
+                        ElevatedButton(text="6", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "6")), 
+                        ElevatedButton(text="7", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "7")), 
+                        ElevatedButton(text="8", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "8")), 
+                        ElevatedButton(text="9", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "9")), 
+                        ElevatedButton(text="0", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "0"))],
+                        spacing=SYSTEM_KEYBOARD_ELEMENT_PADDING
+                    ),
+
+                Row(
+                    controls=[
+                        ElevatedButton(text="Q", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "Q")), 
+                        ElevatedButton(text="W", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "W")), 
+                        ElevatedButton(text="E", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "E")), 
+                        ElevatedButton(text="R", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "R")), 
+                        ElevatedButton(text="T", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "T")), 
+                        ElevatedButton(text="Y", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "Y")), 
+                        ElevatedButton(text="U", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "U")), 
+                        ElevatedButton(text="I", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "I")), 
+                        ElevatedButton(text="O", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "O")), 
+                        ElevatedButton(text="P", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "P"))],
+                        spacing=SYSTEM_KEYBOARD_ELEMENT_PADDING
+                    ),
+
+                Row(
+                    controls=[
+                        ElevatedButton(text="A", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "A")), 
+                        ElevatedButton(text="S", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "S")), 
+                        ElevatedButton(text="D", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "D")), 
+                        ElevatedButton(text="F", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "F")), 
+                        ElevatedButton(text="G", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "G")), 
+                        ElevatedButton(text="H", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "H")), 
+                        ElevatedButton(text="J", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "J")), 
+                        ElevatedButton(text="K", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "K")), 
+                        ElevatedButton(text="L", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "L"))],
+                        spacing=SYSTEM_KEYBOARD_ELEMENT_PADDING
+                    ),
+
+                Row(
+                    controls=[
+                        ElevatedButton(text=" ", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "SHIFT")),  
+                        ElevatedButton(text="Z", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "Z")), 
+                        ElevatedButton(text="X", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "X")), 
+                        ElevatedButton(text="C", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "C")), 
+                        ElevatedButton(text="V", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "V")), 
+                        ElevatedButton(text="B", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "B")), 
+                        ElevatedButton(text="N", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "N")), 
+                        ElevatedButton(text="M", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "M")), 
+                        ElevatedButton(text=" ", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "BACKSPACE"))],
+                        spacing=SYSTEM_KEYBOARD_ELEMENT_PADDING
+                    ),
+
+                Row(
+                    controls=[
+                        ElevatedButton(text="!#1", style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "SYMBOLS")), 
+                        ElevatedButton(text=",", style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, ",")), 
+                        ElevatedButton(text="SPACEBAR", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "SPACEBAR")), 
+                        ElevatedButton(text=".", style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, ".")), 
+                        ElevatedButton(text="NEXT", style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "NEXT"))],
+                        spacing=SYSTEM_KEYBOARD_ELEMENT_PADDING
+                    ),
+                ],
+            ),
+        )
+
     # Creating Screen Abstraction Widget.
     screen_abstraction = Container(
         border_radius=SCREEN_ABSTRACTION_BORDER_RADIUS,
         expand=True,
-        bgcolor=DEFAULT_SCREEN_ABSTRACTION_COLOR,
+        bgcolor=screen_mode_color_handler,
         alignment=alignment.bottom_center,
         
         content=Column(spacing=0, expand=True, controls=[
@@ -158,10 +209,10 @@ def main(page: Page):
                 ),
 
                 # Main Screen.
-                Container(
-                    expand=True,
-                    bgcolor="transparent",
-                ),
+                Container(expand=True),
+
+                # System Keyboard.
+                system_keyboard,
 
                 # Navigation Bar.
                 Container(
@@ -170,7 +221,7 @@ def main(page: Page):
                     content=Row(
                         controls=[
 
-                        # Navigation Bar Buttons.
+                            # Navigation Bar Buttons.
                             ElevatedButton(
                                 text="lll",
                                 elevation=False,
@@ -187,7 +238,7 @@ def main(page: Page):
                                 color=DEFAULT_NAVBAR_COLOR,
                                 bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
                                 style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
-                                on_click=lambda event: go_back_navigation(),
+                                on_click=lambda event: None,
                             ),
                             ElevatedButton(
                                 text=" △ ",
