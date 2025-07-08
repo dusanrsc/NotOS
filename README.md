@@ -2,8 +2,10 @@
 
 # Flet Python Application Simulating a Mobile-Like Operating System Interface.
 
-# Screenshots:
+# (NotOS, Created With The Flet Framework In Python, Is Intended As A Stepping Stone Toward Building Full-Featured Apps In Flutter.)
+# (NotOS Is Supposed To Be My Greatest Project So Far.)
 
+# Screenshots:
 # v0.01.0-Alpha
 # ![screenshot](https://github.com/user-attachments/assets/859ca5a2-595b-4a5a-8513-1f1477e40512)
   
