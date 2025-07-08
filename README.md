@@ -14,3 +14,6 @@
 
 # v0.04.0-Alpha
 ![screenshot2](https://github.com/user-attachments/assets/3d3126fb-843c-420e-8c6b-c3955cf28349)
+
+# v0.05.0-Alpha
+![screenshot3](https://github.com/user-attachments/assets/d7571538-f799-41a4-a64c-76220776b8cd)
