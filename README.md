@@ -17,3 +17,6 @@
 
 # v0.05.0-Alpha
 ![screenshot3](https://github.com/user-attachments/assets/d7571538-f799-41a4-a64c-76220776b8cd)
+
+# v0.51.0-Alpha
+![screenshot4](https://github.com/user-attachments/assets/4f69ba8c-2974-4b0a-9272-2367f3eb3f9b)
