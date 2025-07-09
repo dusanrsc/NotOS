@@ -128,6 +128,8 @@ def main(page: Page):
 
     battery_text_widget = Text(f"{battery_level}%🔋", color=BLACK)
 
+    # entry_field_example = TextField(label="Enter Text", hint_text="Enter Text.")
+
     system_keyboard = Container(
         bgcolor=DARK_GRAY,
         padding=SYSTEM_KEYBOARD_ELEMENT_PADDING,
@@ -232,6 +234,7 @@ def main(page: Page):
 
                     # Rendering Abstraction Of The Main Screen.
                     Container(expand=True),
+                    # entry_field_example,
 
                     # Rendering System Keyboard.
                     system_keyboard,
@@ -245,7 +248,7 @@ def main(page: Page):
 
                                 # Rendering Navigation Bar Buttons.
                                 ElevatedButton(
-                                    text="lll",
+                                    text=" ○ ",
                                     elevation=False,
                                     expand=True,
                                     color=DEFAULT_NAVBAR_COLOR,
@@ -263,7 +266,7 @@ def main(page: Page):
                                     on_click=lambda event: None,
                                 ),
                                 ElevatedButton(
-                                    text=" ⤶ ",
+                                    text=" ▽ ",
                                     elevation=False,
                                     expand=True,
                                     color=DEFAULT_NAVBAR_COLOR,
@@ -299,6 +302,7 @@ def main(page: Page):
 
                     # Rendering Abstraction Of The Main Screen.
                     Container(expand=True),
+                    # entry_field_example,
 
                     # Rendering Navigation Bar.
                     Container(
@@ -309,7 +313,7 @@ def main(page: Page):
 
                                 # Rendering Navigation Bar Buttons.
                                 ElevatedButton(
-                                    text="lll",
+                                    text=" ○ ",
                                     elevation=False,
                                     expand=True,
                                     color=DEFAULT_NAVBAR_COLOR,
@@ -327,7 +331,7 @@ def main(page: Page):
                                     on_click=lambda event: render_system_keyboard(),
                                 ),
                                 ElevatedButton(
-                                    text=" ⤶ ",
+                                    text=" ▽ ",
                                     elevation=False,
                                     expand=True,
                                     color=DEFAULT_NAVBAR_COLOR,
