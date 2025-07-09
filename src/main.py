@@ -1,6 +1,6 @@
 # Imports Section.
 # Importing Modules Section.
-import data
+import metadata
 
 # Importing Sub-Modules Section.
 from flet import *
@@ -71,12 +71,26 @@ def main(page: Page):
     # Setting Up Screen Mode(Dark/Light).
     def set_screen_mode() -> None:
 
+        # Switching Condition.
         if screen_abstraction.bgcolor == BLACK:
             screen_abstraction.bgcolor = WHITE
         else:
             screen_abstraction.bgcolor = BLACK
 
+        # Updating Screen Abstraction.
         screen_abstraction.update()
+
+    # Show System Keyboard From Function{Button Press}.
+    def render_system_keyboard() -> None:
+
+        # Global Variable.
+        global show_system_keyboard
+
+        # Switching Condition.
+        if show_system_keyboard:
+            show_system_keyboard = False
+        else:
+            show_system_keyboard = True
 
     # System Keyboard Key Down.
     def system_keyboard_key_down(event, key=None) -> None:
@@ -97,7 +111,8 @@ def main(page: Page):
         print(navigation_list)
         print(navigation_list[navigation_id])
         print(set_screen_mode())
-        print(system_keyboard_key_down_list)
+        print(f"show_system_keyboard: {show_system_keyboard}")
+        print(f"system_keyboard_key_down_list: {system_keyboard_key_down_list}")
 
     # Main Page Window Settings Section
     page.title = METADATA
@@ -120,6 +135,7 @@ def main(page: Page):
         content=Column(
             spacing=SYSTEM_KEYBOARD_ELEMENT_PADDING,
             controls=[
+                Container(height=get_screen_size(data_type="int")[0] // 400),
                 Row(
                     controls=[
                         ElevatedButton(text="1", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "1")), 
@@ -152,6 +168,7 @@ def main(page: Page):
 
                 Row(
                     controls=[
+                        Container(expand=True),
                         ElevatedButton(text="A", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "A")), 
                         ElevatedButton(text="S", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "S")), 
                         ElevatedButton(text="D", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "D")), 
@@ -160,13 +177,15 @@ def main(page: Page):
                         ElevatedButton(text="H", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "H")), 
                         ElevatedButton(text="J", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "J")), 
                         ElevatedButton(text="K", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "K")), 
-                        ElevatedButton(text="L", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "L"))],
+                        ElevatedButton(text="L", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "L")),
+                        Container(expand=True)],
                         spacing=SYSTEM_KEYBOARD_ELEMENT_PADDING
                     ),
 
                 Row(
                     controls=[
-                        ElevatedButton(text=" ", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "SHIFT")),  
+                        # △⯅
+                        ElevatedButton(text="⯅", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "SHIFT")),  
                         ElevatedButton(text="Z", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "Z")), 
                         ElevatedButton(text="X", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "X")), 
                         ElevatedButton(text="C", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "C")), 
@@ -174,88 +193,155 @@ def main(page: Page):
                         ElevatedButton(text="B", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "B")), 
                         ElevatedButton(text="N", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "N")), 
                         ElevatedButton(text="M", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "M")), 
-                        ElevatedButton(text=" ", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "BACKSPACE"))],
+                        ElevatedButton(text="⌫", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "BACKSPACE"))],
                         spacing=SYSTEM_KEYBOARD_ELEMENT_PADDING
                     ),
 
                 Row(
                     controls=[
-                        ElevatedButton(text="!#1", style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "SYMBOLS")), 
-                        ElevatedButton(text=",", style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, ",")), 
-                        ElevatedButton(text="SPACEBAR", expand=True, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "SPACEBAR")), 
-                        ElevatedButton(text=".", style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, ".")), 
-                        ElevatedButton(text="NEXT", style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "NEXT"))],
+                        ElevatedButton(text="!#1",   expand=True,  style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "SYMBOLS")), 
+                        ElevatedButton(text=",",     expand=False, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, ",")), 
+                        ElevatedButton(text="English", expand=True,  style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "SPACEBAR")), 
+                        ElevatedButton(text=".",     expand=False, style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, ".")), 
+                        ElevatedButton(text="NEXT",  expand=True,  style=ButtonStyle(shape=RoundedRectangleBorder(radius=5)), on_click=lambda event: system_keyboard_key_down(None, "NEXT"))],
                         spacing=SYSTEM_KEYBOARD_ELEMENT_PADDING
+                    ),
+                        Container(height=get_screen_size(data_type="int")[0] // 400),
+                ],
+            ),
+        )
+
+    # Creating And Rendering Screen Abstraction Widget.
+    # With Showed System Keyboard Condition.
+    if show_system_keyboard:
+        screen_abstraction = Container(
+            border_radius=SCREEN_ABSTRACTION_BORDER_RADIUS,
+            expand=True,
+            bgcolor=screen_mode_color_handler,
+            alignment=alignment.bottom_center,
+            
+            content=Column(spacing=0, expand=True, controls=[
+
+                    # Rendering Status Bar.
+                    Container(
+                        height=(DEFAULT_NAVBAR_HEIGHT // 1.75),
+                        bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                        alignment=alignment.center_left,
+                        content=Row([now_text_widget, Container(expand=True), battery_text_widget])
+                    ),
+
+                    # Rendering Abstraction Of The Main Screen.
+                    Container(expand=True),
+
+                    # Rendering System Keyboard.
+                    system_keyboard,
+
+                    # Rendering Navigation Bar.
+                    Container(
+                        height=DEFAULT_NAVBAR_HEIGHT,
+                        bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                        content=Row(
+                            controls=[
+
+                                # Rendering Navigation Bar Buttons.
+                                ElevatedButton(
+                                    text="lll",
+                                    elevation=False,
+                                    expand=True,
+                                    color=DEFAULT_NAVBAR_COLOR,
+                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
+                                    on_click=lambda event: None,
+                                ),
+                                ElevatedButton(
+                                    text=" ▢ ",
+                                    elevation=False,
+                                    expand=True,
+                                    color=DEFAULT_NAVBAR_COLOR,
+                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
+                                    on_click=lambda event: None,
+                                ),
+                                ElevatedButton(
+                                    text=" ⤶ ",
+                                    elevation=False,
+                                    expand=True,
+                                    color=DEFAULT_NAVBAR_COLOR,
+                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
+                                    on_click=lambda event: print_development_data(),
+                                ),
+                            ],
+                            spacing=(get_screen_size(data_type="int")[0] // 10),
+                        ),
                     ),
                 ],
             ),
         )
 
-    # Creating Screen Abstraction Widget.
-    screen_abstraction = Container(
-        border_radius=SCREEN_ABSTRACTION_BORDER_RADIUS,
-        expand=True,
-        bgcolor=screen_mode_color_handler,
-        alignment=alignment.bottom_center,
-        
-        content=Column(spacing=0, expand=True, controls=[
+    # Without Showed System Keyboard Condition.
+    else:
+        screen_abstraction = Container(
+            border_radius=SCREEN_ABSTRACTION_BORDER_RADIUS,
+            expand=True,
+            bgcolor=screen_mode_color_handler,
+            alignment=alignment.bottom_center,
+            
+            content=Column(spacing=0, expand=True, controls=[
 
-                # Status Bar.
-                Container(
-                    height=(DEFAULT_NAVBAR_HEIGHT // 1.75),
-                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
-                    alignment=alignment.center_left,
-                    content=Row([now_text_widget, Container(expand=True), battery_text_widget])
-                ),
-
-                # Main Screen.
-                Container(expand=True),
-
-                # System Keyboard.
-                system_keyboard,
-
-                # Navigation Bar.
-                Container(
-                    height=DEFAULT_NAVBAR_HEIGHT,
-                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
-                    content=Row(
-                        controls=[
-
-                            # Navigation Bar Buttons.
-                            ElevatedButton(
-                                text="lll",
-                                elevation=False,
-                                expand=True,
-                                color=DEFAULT_NAVBAR_COLOR,
-                                bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
-                                style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
-                                on_click=lambda event: None,
-                            ),
-                            ElevatedButton(
-                                text=" O ",
-                                elevation=False,
-                                expand=True,
-                                color=DEFAULT_NAVBAR_COLOR,
-                                bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
-                                style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
-                                on_click=lambda event: None,
-                            ),
-                            ElevatedButton(
-                                text=" △ ",
-                                elevation=False,
-                                expand=True,
-                                color=DEFAULT_NAVBAR_COLOR,
-                                bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
-                                style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
-                                on_click=lambda event: print_development_data(),
-                            ),
-                        ],
-                        spacing=(get_screen_size(data_type="int")[0] // 10),
+                    # Rendering Status Bar.
+                    Container(
+                        height=(DEFAULT_NAVBAR_HEIGHT // 1.75),
+                        bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                        alignment=alignment.center_left,
+                        content=Row([now_text_widget, Container(expand=True), battery_text_widget])
                     ),
-                ),
-            ],
-        ),
-    )
+
+                    # Rendering Abstraction Of The Main Screen.
+                    Container(expand=True),
+
+                    # Rendering Navigation Bar.
+                    Container(
+                        height=DEFAULT_NAVBAR_HEIGHT,
+                        bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                        content=Row(
+                            controls=[
+
+                                # Rendering Navigation Bar Buttons.
+                                ElevatedButton(
+                                    text="lll",
+                                    elevation=False,
+                                    expand=True,
+                                    color=DEFAULT_NAVBAR_COLOR,
+                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
+                                    on_click=lambda event: None,
+                                ),
+                                ElevatedButton(
+                                    text=" ▢ ",
+                                    elevation=False,
+                                    expand=True,
+                                    color=DEFAULT_NAVBAR_COLOR,
+                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
+                                    on_click=lambda event: render_system_keyboard(),
+                                ),
+                                ElevatedButton(
+                                    text=" ⤶ ",
+                                    elevation=False,
+                                    expand=True,
+                                    color=DEFAULT_NAVBAR_COLOR,
+                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
+                                    on_click=lambda event: print_development_data(),
+                                ),
+                            ],
+                            spacing=(get_screen_size(data_type="int")[0] // 10),
+                        ),
+                    ),
+                ],
+            ),
+        )
 
     # Rendering Parent Container Widget Into A Page. 
     page.add(screen_abstraction)
