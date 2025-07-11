@@ -10,6 +10,8 @@ from colors import *
 # Main NotOS Logic Section.
 def main(page: Page):
 
+    # Global Variables Section.
+
     # Local Logic For Screen Mode!
     if screen_mode == screen_mode_options[0]:
         screen_mode_color_handler = BLACK
@@ -82,15 +84,7 @@ def main(page: Page):
 
     # Show System Keyboard From Function{Button Press}.
     def render_system_keyboard() -> None:
-
-        # Global Variable.
-        global show_system_keyboard
-
-        # Switching Condition.
-        if show_system_keyboard:
-            show_system_keyboard = False
-        else:
-            show_system_keyboard = True
+        pass
 
     # System Keyboard Key Down.
     def system_keyboard_key_down(event, key=None) -> None:
@@ -123,10 +117,10 @@ def main(page: Page):
     page.update()
 
     # Content Widgets Section.
-    today_text_widget = Text(day_today)
-    now_text_widget = Text(time_now, color=BLACK)
+    today_text_widget = Text(day_today, color=WHITE, bgcolor=BLACK)
+    now_text_widget = Text(time_now, color=WHITE, bgcolor=BLACK)
 
-    battery_text_widget = Text(f"{battery_level}%🔋", color=BLACK)
+    battery_text_widget = Text(f"{battery_level}%🔋", color=WHITE, bgcolor=BLACK)
 
     # entry_field_example = TextField(label="Enter Text", hint_text="Enter Text.")
 
@@ -227,13 +221,13 @@ def main(page: Page):
                     # Rendering Status Bar.
                     Container(
                         height=(DEFAULT_NAVBAR_HEIGHT // 1.75),
-                        bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                        bgcolor=BLACK,
                         alignment=alignment.center_left,
                         content=Row([now_text_widget, Container(expand=True), battery_text_widget])
                     ),
 
                     # Rendering Abstraction Of The Main Screen.
-                    Container(expand=True),
+                    Container(expand=True, bgcolor=ALPHA),
                     # entry_field_example,
 
                     # Rendering System Keyboard.
@@ -242,7 +236,7 @@ def main(page: Page):
                     # Rendering Navigation Bar.
                     Container(
                         height=DEFAULT_NAVBAR_HEIGHT,
-                        bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                        bgcolor=BLACK,
                         content=Row(
                             controls=[
 
@@ -251,8 +245,8 @@ def main(page: Page):
                                     text=" ○ ",
                                     elevation=False,
                                     expand=True,
-                                    color=DEFAULT_NAVBAR_COLOR,
-                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    color=WHITE,
+                                    bgcolor=BLACK,
                                     style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
                                     on_click=lambda event: None,
                                 ),
@@ -260,17 +254,17 @@ def main(page: Page):
                                     text=" ▢ ",
                                     elevation=False,
                                     expand=True,
-                                    color=DEFAULT_NAVBAR_COLOR,
-                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    color=WHITE,
+                                    bgcolor=BLACK,
                                     style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
-                                    on_click=lambda event: None,
+                                    on_click=lambda event: render_system_keyboard(),
                                 ),
                                 ElevatedButton(
                                     text=" ▽ ",
                                     elevation=False,
                                     expand=True,
-                                    color=DEFAULT_NAVBAR_COLOR,
-                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    color=WHITE,
+                                    bgcolor=BLACK,
                                     style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
                                     on_click=lambda event: print_development_data(),
                                 ),
@@ -295,19 +289,19 @@ def main(page: Page):
                     # Rendering Status Bar.
                     Container(
                         height=(DEFAULT_NAVBAR_HEIGHT // 1.75),
-                        bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                        bgcolor=BLACK,
                         alignment=alignment.center_left,
                         content=Row([now_text_widget, Container(expand=True), battery_text_widget])
                     ),
 
                     # Rendering Abstraction Of The Main Screen.
-                    Container(expand=True),
+                    Container(expand=True, bgcolor=ALPHA),
                     # entry_field_example,
 
                     # Rendering Navigation Bar.
                     Container(
                         height=DEFAULT_NAVBAR_HEIGHT,
-                        bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                        bgcolor=BLACK,
                         content=Row(
                             controls=[
 
@@ -316,8 +310,8 @@ def main(page: Page):
                                     text=" ○ ",
                                     elevation=False,
                                     expand=True,
-                                    color=DEFAULT_NAVBAR_COLOR,
-                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    color=WHITE,
+                                    bgcolor=BLACK,
                                     style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
                                     on_click=lambda event: None,
                                 ),
@@ -325,8 +319,8 @@ def main(page: Page):
                                     text=" ▢ ",
                                     elevation=False,
                                     expand=True,
-                                    color=DEFAULT_NAVBAR_COLOR,
-                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    color=WHITE,
+                                    bgcolor=BLACK,
                                     style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
                                     on_click=lambda event: render_system_keyboard(),
                                 ),
@@ -334,8 +328,8 @@ def main(page: Page):
                                     text=" ▽ ",
                                     elevation=False,
                                     expand=True,
-                                    color=DEFAULT_NAVBAR_COLOR,
-                                    bgcolor=DEFAULT_NAVBAR_BACKGROUND_COLOR,
+                                    color=WHITE,
+                                    bgcolor=BLACK,
                                     style=ButtonStyle(text_style=TextStyle(size=DEFAULT_NAVBAR_BUTTON_FONT_SIZE)),
                                     on_click=lambda event: print_development_data(),
                                 ),

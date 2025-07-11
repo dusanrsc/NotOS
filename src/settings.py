@@ -16,12 +16,17 @@ PROJECT_NAME: str = "NotOS"
 
 METADATA: str = f"{PROJECT_NAME} {metadata.__version__} github: {metadata.__developer__}"
 
+DEFAULT_SYSTEM_STATUS_BAR_HEIGHT_DIVIDER: float = 1.5
+
 SCREEN_ABSTRACTION_BORDER_RADIUS: int = 10
 
 DEFAULT_NAVBAR_HEIGHT: int = 40
 DEFAULT_NAVBAR_BUTTON_FONT_SIZE: int = 30
 
 SYSTEM_KEYBOARD_ELEMENT_PADDING: int = 4
+
+SYSTEM_KEYBOARD_TOP_GAP_DIVIDER: int = 100
+SYSTEM_KEYBOARD_BOTTOM_GAP_DIVIDER: int = SYSTEM_KEYBOARD_TOP_GAP_DIVIDER
 
 # Global Variable Section.
 navigation_id: int = 0
@@ -42,3 +47,8 @@ system_keyboard_key_list: list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "
 system_keyboard_key_down_list: list = []
 
 show_system_keyboard: bool = True
+
+# Color Handler Variable Section.
+screen_mode_color_handler: str = ""
+system_keyboard_background_color_handler: str = ""
+system_status_bar_background_color_handler: str = ""
