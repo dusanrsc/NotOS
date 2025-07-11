@@ -6,6 +6,9 @@
 # NotOS Is Supposed To Be My Greatest Project So Far.
 
 # Screenshots:
+# v0.53.0-Alpha
+![screenshot5](https://github.com/user-attachments/assets/f50b22ac-22e6-4b7c-992c-8d0bd6e4f94f)
+
 # v0.52.0-Alpha
 ![screenshot5](https://github.com/user-attachments/assets/bb87e708-1416-43ba-b40b-94f98e8a7ce5)
 
