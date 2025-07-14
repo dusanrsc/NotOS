@@ -32,7 +32,7 @@ SYSTEM_KEYBOARD_BOTTOM_GAP_DIVIDER: int = SYSTEM_KEYBOARD_TOP_GAP_DIVIDER
 navigation_id: int = 0
 
 day_today: int = date.today()
-time_now: str = datetime.now().time().strftime(" %H:%M ")
+time_now: str = datetime.now().time().strftime(" %H:%M:%S ")
 
 battery_level: int = 100
 

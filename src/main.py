@@ -1,6 +1,7 @@
 # Imports Section.
 # Importing Modules Section.
 import metadata
+import asyncio
 
 # Importing Sub-Modules Section.
 from flet import *
@@ -8,7 +9,7 @@ from settings import *
 from colors import *
 
 # Main NotOS Logic Section.
-def main(page: Page):
+async def main(page: Page):
 
     # Global Variables Section.
 
@@ -108,11 +109,18 @@ def main(page: Page):
         print(f"show_system_keyboard: {show_system_keyboard}")
         print(f"system_keyboard_key_down_list: {system_keyboard_key_down_list}")
 
+    # Async Function For Updating Clock Data Automatically.
+    async def update_clock(after_seconds=1):
+        while True:
+            now_text_widget.value = datetime.now().strftime(" %H:%M ")
+            now_text_widget.update()
+            await asyncio.sleep(after_seconds)
+
     # Main Page Window Settings Section
     page.title = METADATA
     page.window.width = WINDOW_WIDTH
     page.window.height = WINDOW_HEIGHT
-    page.window.resizable = False # Conditionaly
+    page.window.resizable = False
     page.bgcolor = DEFAULT_PAGE_COLOR
     page.update()
 
@@ -121,8 +129,6 @@ def main(page: Page):
     now_text_widget = Text(time_now, color=WHITE, bgcolor=BLACK)
 
     battery_text_widget = Text(f"{battery_level}%🔋", color=WHITE, bgcolor=BLACK)
-
-    # entry_field_example = TextField(label="Enter Text", hint_text="Enter Text.")
 
     system_keyboard = Container(
         bgcolor=DARK_GRAY,
@@ -223,6 +229,7 @@ def main(page: Page):
                         height=(DEFAULT_NAVBAR_HEIGHT // 1.75),
                         bgcolor=BLACK,
                         alignment=alignment.center_left,
+                        on_click=lambda event: None,
                         content=Row([now_text_widget, Container(expand=True), battery_text_widget])
                     ),
 
@@ -343,6 +350,9 @@ def main(page: Page):
 
     # Rendering Parent Container Widget Into A Page. 
     page.add(screen_abstraction)
+
+    # Activating Async Update Clock Function.
+    asyncio.create_task(update_clock())
     
 # Rendering The Main Window - Starting The NotOS!
 app(target=main)
