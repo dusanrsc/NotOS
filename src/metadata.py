@@ -1,4 +1,4 @@
-# data.py
+# metadata.py
 
 # Metadata Section.
 __version__: str = "v0.55.0-Alpha"
