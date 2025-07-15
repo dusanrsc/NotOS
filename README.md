@@ -6,9 +6,8 @@
 # NotOS Is Supposed To Be My Greatest Project So Far.
 
 # Screenshots:
-# v0.55.0-Alpha
-# !NO SCREENSHOT!
-# Added Async Function For Updating Battery Percent Automatically.
+
+# v0.55.0-Alpha: Added Async Function For Updating Battery Percent Automatically.
 
 # v0.53.0b-Alpha
 ![screenshot6](https://github.com/user-attachments/assets/f50b22ac-22e6-4b7c-992c-8d0bd6e4f94f)
