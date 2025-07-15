@@ -2,6 +2,7 @@
 # Importing Modules Section.
 import metadata
 import asyncio
+import psutil
 
 # Importing Sub-Modules Section.
 from flet import *
@@ -108,12 +109,27 @@ async def main(page: Page):
         print(set_screen_mode())
         print(f"show_system_keyboard: {show_system_keyboard}")
         print(f"system_keyboard_key_down_list: {system_keyboard_key_down_list}")
+        print(f"time_now: {datetime.now().strftime(" %H:%M:%S ")}")
+        print(f"battery_level: {psutil.sensors_battery().percent}")
 
     # Async Function For Updating Clock Data Automatically.
     async def update_clock(after_seconds=1):
         while True:
             now_text_widget.value = datetime.now().strftime(" %H:%M ")
             now_text_widget.update()
+            await asyncio.sleep(after_seconds)
+
+    # Async Function For Updating Battery Percent Automatically.
+    async def update_battery(after_seconds=30):
+        while True:
+            battery = psutil.sensors_battery()
+            if battery:
+                battery_level = battery.percent
+                battery_text_widget.value = f"{battery_level}%🔋"
+            else:
+                battery_text_widget.value = "100%🔋"
+
+            battery_text_widget.update()
             await asyncio.sleep(after_seconds)
 
     # Main Page Window Settings Section
@@ -127,7 +143,6 @@ async def main(page: Page):
     # Content Widgets Section.
     today_text_widget = Text(day_today, color=WHITE, bgcolor=BLACK)
     now_text_widget = Text(time_now, color=WHITE, bgcolor=BLACK)
-
     battery_text_widget = Text(f"{battery_level}%🔋", color=WHITE, bgcolor=BLACK)
 
     system_keyboard = Container(
@@ -351,8 +366,9 @@ async def main(page: Page):
     # Rendering Parent Container Widget Into A Page. 
     page.add(screen_abstraction)
 
-    # Activating Async Update Clock Function.
+    # Activating Async Update Function.
     asyncio.create_task(update_clock())
+    asyncio.create_task(update_battery())
     
 # Rendering The Main Window - Starting The NotOS!
 app(target=main)

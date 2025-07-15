@@ -34,7 +34,7 @@ navigation_id: int = 0
 day_today: int = date.today()
 time_now: str = datetime.now().time().strftime(" %H:%M:%S ")
 
-battery_level: int = 100
+battery_level: int = 0
 
 # List Section.
 navigation_list: list = ["home", "phone", "camera", "sms"]
