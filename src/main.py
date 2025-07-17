@@ -14,17 +14,17 @@ from colors import *
 # Main NotOS Logic Section.
 async def main(page: Page):
 
-    # Global Variables Section.
+    # NotOS Local Settings Section.
+    # Local Variable Section.
+    # WINDOW_WIDTH  = page.window.width
+    # WINDOW_HEIGHT = page.window.height
 
-    # Local Logic For Screen Mode!
+    # Local Program Section.
+    # Logic For Screen Mode!
     if screen_mode == screen_mode_options[0]:
         screen_mode_color_handler = BLACK
     else:
         screen_mode_color_handler = WHITE
-
-    # NotOS Local Settings Section.
-    # WINDOW_WIDTH  = page.window.width
-    # WINDOW_HEIGHT = page.window.height
 
     # Local Functions Section.
     # Get Screen Size Function.
@@ -115,14 +115,14 @@ async def main(page: Page):
         print(f"battery_level: {psutil.sensors_battery().percent}")
 
     # Async Function For Updating Clock Data Automatically.
-    async def update_clock(after_seconds=1):
+    async def update_clock(after_seconds=1) -> None:
         while True:
             now_text_widget.value = datetime.now().strftime(" %H:%M ")
             now_text_widget.update()
             await asyncio.sleep(after_seconds)
 
     # Async Function For Updating Battery Percent Automatically.
-    async def update_battery(after_seconds=30):
+    async def update_battery(after_seconds=30) -> None:
         while True:
             battery = psutil.sensors_battery()
             if battery:
@@ -141,6 +141,14 @@ async def main(page: Page):
     page.window.resizable = False
     page.bgcolor = DEFAULT_PAGE_COLOR
     page.update()
+
+    # Simulating Foldable NotOS.
+    if is_foldable:
+        page.window.width  = (WINDOW_WIDTH * 2)
+        page.window.height = WINDOW_HEIGHT
+    else:
+        page.window.width  = WINDOW_WIDTH
+        page.window.height = WINDOW_HEIGHT
 
     # Content Widgets Section.
     today_text_widget = Text(day_today, color=WHITE, bgcolor=BLACK)

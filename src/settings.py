@@ -9,7 +9,7 @@ from datetime import date, datetime
 
 # NotOS Global Settings Section.
 # CONSTANTS Section.
-WINDOW_WIDTH: int  = 400
+WINDOW_WIDTH:  int = 400
 WINDOW_HEIGHT: int = 850
 
 PROJECT_NAME: str = "NotOS"
@@ -47,6 +47,7 @@ system_keyboard_key_list: list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "
 system_keyboard_key_down_list: list = []
 
 show_system_keyboard: bool = True
+is_foldable: bool = False
 
 # Color Handler Variable Section.
 screen_mode_color_handler: str = ""
