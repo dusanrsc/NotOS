@@ -7,6 +7,7 @@
 
 # Screenshots:
 
+# v0.56.0-Alpha: Minor Refactorization Done!
 # v0.55.0-Alpha: Added Async Function For Updating Battery Percent Automatically.
 
 # v0.53.0b-Alpha
